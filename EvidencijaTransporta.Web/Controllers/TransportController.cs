@@ -1,45 +1,57 @@
 ﻿using EvidencijaTransporta.DataAccess;
+using EvidencijaTransporta.DataAccess.Models.CreateReservation;
 using EvidencijaTransporta.DataAccess.Models.ListOfAllTransports;
 using EvidencijaTransporta.Web.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace EvidencijaTransporta.Web.Controllers
 {
-    public class TransportController : Controller
+	public class TransportController : BaseController
     {
-        public Repository Repository { get; set; } = new Repository();
+        private CreateTransportModel CreateReservateTransportViewModel(CreateTransportModel model = null)
+		{
+            CreateTransportModel viewModel = new CreateTransportModel
+            {
+                TransportTypes = TransportService.GetAllTransportTypesService().Select(transport => new SelectListItem
+                {
+                    Text = transport.TransportType,
+                    Value = transport.Id.ToString()
+                })
+            };
+
+            return viewModel;
+        }
+
 		// GET: Transport
 		public ActionResult Index()
         {
             return View();
         }
 
+        public ActionResult ReservateTransport()
+        {
+            return View(CreateReservateTransportViewModel());
+        }
+
+		[HttpPost]
+		public ActionResult ReservateTransport(CreateTransportModel model)
+		{
+            if (ModelState.IsValid)
+			{
+                TransportService.ReservateTransportService(model);
+
+                return RedirectToAction("ListTransports");
+			}
+
+			return View(CreateReservateTransportViewModel());
+		}
+
         public ActionResult ListTransports()
         {
-            List<TransportModel> models = new List<TransportModel>();
+            List<TransportModel> models = TransportService.ListTransportsService();
 
-            RequestAllTransports request = new RequestAllTransports
-            {
-                Id = 1
-            };
-
-            List<ResponseAllTransports> transports = Repository.GetListStoredProcedure<ResponseAllTransports, RequestAllTransports>(request);
-
-            foreach (var transport in transports)
-            {
-                models.Add(new TransportModel
-                {
-                    Id = transport.Id,
-                    Datum = transport.Date,
-                    KolicinaTransportneRobe = transport.ShipmentAmount,
-                    VrstaTransporta = transport.TypeOfTransport,
-                    VrstaVozila = transport.TypeOfVehicle
-                });
-            }
             return View(models);
         }
     }

@@ -1,23 +1,15 @@
 ﻿using EvidencijaTransporta.DataAccess.Models;
-using System;
+using EvidencijaTransporta.Common.HelperModel;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace EvidencijaTransporta.DataAccess
 {
 	public class Repository
 	{
 		private readonly string _connectionString = ConfigurationManager.ConnectionStrings["IP_PK2020Usluge3"].ConnectionString;
-
-		public TResponse GetModelStoredProcedure<TResponse, TRequest>(TRequest request)
-			where TResponse : new()
-			where TRequest : new()
-		{
-			return new TResponse();
-		}
 
 		public List<TResponse> GetListStoredProcedure<TResponse, TRequest>(TRequest request)
 			where TResponse : IResponseModel, new()
@@ -50,7 +42,6 @@ namespace EvidencijaTransporta.DataAccess
 			where TResponse : IResponseModel, new()
 			where TRequest : IRequestModel, new()
 		{
-
 			using (SqlConnection connection = new SqlConnection(_connectionString))
 			{
 				connection.Open();
@@ -60,7 +51,23 @@ namespace EvidencijaTransporta.DataAccess
 					command.CommandText = request.GetClassAttribute();
 					command.CommandType = CommandType.StoredProcedure;
 
-					return new TResponse();
+					foreach(ParameterModel parameter in request.GetParameters(request))
+					{
+						command.Parameters.Add(parameter.ParameterName, parameter.DbType);
+						command.Parameters[parameter.ParameterName].Value = parameter.Value;
+					}
+
+					TResponse response = new TResponse();
+
+					using(SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							response.MapToObject(reader);
+						}
+					}
+
+					return response;
 				}
 			}
 		}
