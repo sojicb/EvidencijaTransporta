@@ -8,7 +8,6 @@ namespace EvidencijaTransporta.DataAccess.Models
 {
 	public interface IRequestModel
 	{
-		//int Id { get; set; }
 		List<ParameterModel> GetParameters<TType>(TType istance);
 		string GetClassAttribute();
 	}

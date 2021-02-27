@@ -4,16 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EvidencijaTransporta.DataAccess.Models.ListOfAllTransports
+namespace EvidencijaTransporta.DataAccess.Models.ListAllTransportTypes
 {
-	[DataBaseProcedureName(Constants.DataBaseProcedureNames.LIST_ALL_TRANSPORTS)]
-	public class RequestAllTransports : IRequestModel
+	[DataBaseProcedureName(Constants.DataBaseProcedureNames.LIST_ALL_TRANSPORT_TYPES)]
+	public class ListAllTransportTypesRequestModel : IRequestModel
 	{
 		public string GetClassAttribute()
 		{
 			DataBaseProcedureNameAttribute attribute = (DataBaseProcedureNameAttribute)Attribute
-				.GetCustomAttribute(typeof(RequestAllTransports), typeof(DataBaseProcedureNameAttribute));
-			
+				.GetCustomAttribute(typeof(ListAllTransportTypesRequestModel), typeof(DataBaseProcedureNameAttribute));
+
 			return attribute.ProcedureName;
 		}
 
