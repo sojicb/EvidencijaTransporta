@@ -24,12 +24,6 @@ namespace EvidencijaTransporta.Web.Controllers
             return viewModel;
         }
 
-		// GET: Transport
-		public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult ReservateTransport()
         {
             return View(CreateReservateTransportViewModel());
@@ -48,7 +42,7 @@ namespace EvidencijaTransporta.Web.Controllers
 			return View(CreateReservateTransportViewModel());
 		}
 
-        public ActionResult ListTransports()
+        public ActionResult ListTransportReservations()
         {
             List<TransportModel> models = TransportService.ListTransportsService();
 
