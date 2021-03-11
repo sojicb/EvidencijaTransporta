@@ -13,7 +13,7 @@ namespace EvidencijaTransporta.DataAccess
 
 		public List<TResponse> GetListStoredProcedure<TResponse, TRequest>(TRequest request)
 			where TResponse : IResponseModel, new()
-			where TRequest : IRequestModel, new()
+			where TRequest : RequestModel<TRequest>, new()
 		{
 			using (SqlConnection connection = new SqlConnection(_connectionString))
 			{
@@ -40,7 +40,7 @@ namespace EvidencijaTransporta.DataAccess
 
 		public TResponse CreateNewModel<TRequest, TResponse>(TRequest request)
 			where TResponse : IResponseModel, new()
-			where TRequest : IRequestModel, new()
+			where TRequest : RequestModel<TRequest>, new()
 		{
 			using (SqlConnection connection = new SqlConnection(_connectionString))
 			{

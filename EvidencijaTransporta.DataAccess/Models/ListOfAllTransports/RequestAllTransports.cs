@@ -7,17 +7,9 @@ using System.Text;
 namespace EvidencijaTransporta.DataAccess.Models.ListOfAllTransports
 {
 	[DataBaseProcedureName(Constants.DataBaseProcedureNames.LIST_ALL_TRANSPORTS)]
-	public class RequestAllTransports : IRequestModel
+	public class RequestAllTransports : RequestModel<RequestAllTransports>
 	{
-		public string GetClassAttribute()
-		{
-			DataBaseProcedureNameAttribute attribute = (DataBaseProcedureNameAttribute)Attribute
-				.GetCustomAttribute(typeof(RequestAllTransports), typeof(DataBaseProcedureNameAttribute));
-			
-			return attribute.ProcedureName;
-		}
-
-		public List<ParameterModel> GetParameters<TType>(TType istance)
+		public override List<ParameterModel> GetParameters<TType>(TType istance)
 		{
 			throw new NotImplementedException();
 		}

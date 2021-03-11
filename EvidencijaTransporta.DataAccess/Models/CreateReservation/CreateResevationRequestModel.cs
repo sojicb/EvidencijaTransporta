@@ -9,7 +9,7 @@ using System.Text;
 namespace EvidencijaTransporta.DataAccess.Models.CreateReservation
 {
 	[DataBaseProcedureName(Constants.DataBaseProcedureNames.RESERVATE_TRANSPORT)]
-	public class CreateResevationRequestModel : IRequestModel
+	public class CreateResevationRequestModel : RequestModel<CreateResevationRequestModel>
 	{
 		[DataBaseRequestParameterName("Datum", SqlDbType.Date)]
 		public DateTime Date { get; set; }
@@ -23,15 +23,7 @@ namespace EvidencijaTransporta.DataAccess.Models.CreateReservation
 		[DataBaseRequestParameterName("VrstaTransportaId", SqlDbType.Int)]
 		public int TypeOfTransport { get; set; }
 
-		public string GetClassAttribute()
-		{
-			DataBaseProcedureNameAttribute attribute = (DataBaseProcedureNameAttribute)Attribute
-				.GetCustomAttribute(typeof(CreateResevationRequestModel), typeof(DataBaseProcedureNameAttribute));
-
-			return attribute.ProcedureName;
-		}
-
-		public List<ParameterModel> GetParameters<TType>(TType istance)
+		public override List<ParameterModel> GetParameters<TType>(TType istance)
 		{
 			List<ParameterModel> parameters = new List<ParameterModel>();
 

@@ -10,8 +10,10 @@ namespace EvidencijaTransporta.Web.Controllers
 		{
 			Repository = new Repository();
 			TransportService = new TransportService(Repository);
+			WarehouseService = new WarehouseService(Repository);
 		}
 		protected Repository Repository { get; }
 		protected TransportService TransportService { get; }
+		protected WarehouseService WarehouseService { get; set; }
 	}
 }

@@ -17,6 +17,10 @@ namespace EvidencijaTransporta.Web.Services
             _repository = repository;
 		}
 
+		/// <summary>
+		/// Gets a list of all transport types from the database
+		/// </summary>
+		/// <returns>All transportTypes converted into TransportTypeModel</returns>
         public List<TransportTypeModel> GetAllTransportTypesService()
         {
             ListAllTransportTypesRequestModel request = new ListAllTransportTypesRequestModel();
@@ -27,6 +31,10 @@ namespace EvidencijaTransporta.Web.Services
             return responseModels.Select(m => new TransportTypeModel(m)).ToList();
         }
 
+		/// <summary>
+		/// Converts the CreateTransportModel from the view into a request model to be inserted into database
+		/// </summary>
+		/// <param name="model"></param>
         public void ReservateTransportService(CreateTransportModel model)
 		{
 			CreateResevationRequestModel transport = new CreateResevationRequestModel
@@ -41,6 +49,10 @@ namespace EvidencijaTransporta.Web.Services
 				.CreateNewModel<CreateResevationRequestModel, CreateReservationResponseModel>(transport);
 		}
 
+		/// <summary>
+		/// Gets a list of all transports from the database
+		/// </summary>
+		/// <returns>All reservedTransports converted into TransportModel</returns>
 		public List<TransportModel> ListTransportsService()
 		{
 			RequestAllTransports request = new RequestAllTransports();
@@ -49,5 +61,5 @@ namespace EvidencijaTransporta.Web.Services
 
 			return responseModels.Select(m => new TransportModel(m)).ToList();
 		}
-    }
+	}
 }

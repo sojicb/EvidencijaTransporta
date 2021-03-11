@@ -2,12 +2,11 @@
 using EvidencijaTransporta.DataAccess.Attributes;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace EvidencijaTransporta.DataAccess.Models.ListAllTransportTypes
+namespace EvidencijaTransporta.DataAccess.Models.ListAllWarehouses
 {
-	[DataBaseProcedureName(Constants.DataBaseProcedureNames.LIST_ALL_TRANSPORT_TYPES)]
-	public class ListAllTransportTypesRequestModel : RequestModel<ListAllTransportTypesRequestModel>
+	[DataBaseProcedureName(Constants.DataBaseProcedureNames.LIST_ALL_WAREHOUSES)]
+	public class ListAllWarehousesRequest : RequestModel<ListAllWarehousesRequest>
 	{
 		public override List<ParameterModel> GetParameters<TType>(TType istance)
 		{
