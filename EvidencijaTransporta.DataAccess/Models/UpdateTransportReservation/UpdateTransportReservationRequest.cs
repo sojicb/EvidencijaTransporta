@@ -1,15 +1,18 @@
 ﻿using EvidencijaTransporta.Common.HelperModel;
 using EvidencijaTransporta.DataAccess.Attributes;
 using System;
-using System.Data;
 using System.Collections.Generic;
+using System.Data;
 using System.Reflection;
 
-namespace EvidencijaTransporta.DataAccess.Models.CreateReservation
+namespace EvidencijaTransporta.DataAccess.Models.UpdateTransportReservation
 {
-	[DataBaseProcedureName(Constants.DataBaseProcedureNames.RESERVATE_TRANSPORT)]
-	public class CreateResevationRequestModel : RequestModel<CreateResevationRequestModel>
+	[DataBaseProcedureName(Constants.DataBaseProcedureNames.UPDATE_TRANSPORT_RESERVATION)]
+	public class UpdateTransportReservationRequest : RequestModel<UpdateTransportReservationRequest>
 	{
+		[DataBaseRequestParameterName("Id", SqlDbType.Int)]
+		public int Id { get; set; }
+
 		[DataBaseRequestParameterName("Datum", SqlDbType.Date)]
 		public DateTime Date { get; set; }
 
@@ -26,7 +29,7 @@ namespace EvidencijaTransporta.DataAccess.Models.CreateReservation
 		{
 			List<ParameterModel> parameters = new List<ParameterModel>();
 
-			foreach(PropertyInfo property in istance.GetType().GetProperties())
+			foreach (PropertyInfo property in istance.GetType().GetProperties())
 			{
 				DataBaseRequestParameterNameAttribute attribute = (DataBaseRequestParameterNameAttribute)property.GetCustomAttribute(typeof(DataBaseRequestParameterNameAttribute), false);
 

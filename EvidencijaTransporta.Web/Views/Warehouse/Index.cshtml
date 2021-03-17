@@ -1,0 +1,58 @@
+﻿@model WarehouseViewModel
+
+<h2>Warehouses</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Warehouses.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Warehouses.First().CurrentCapacity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Warehouses.First().MaximumCapacity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Warehouses.First().City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Warehouses.First().Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Warehouses.First().StreetAndNumber)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (WarehouseModel warehouse in Model.Warehouses)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => warehouse.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => warehouse.CurrentCapacity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => warehouse.MaximumCapacity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => warehouse.City)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => warehouse.Country)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => warehouse.StreetAndNumber)
+    </td>
+    <td>
+        <button id="listStorage-@warehouse.Id" type="button" onclick="ShowInfo(@warehouse.Id)">List Storage</button>
+    </td>
+</tr>
+    }
+</table>
+<div id="warehouseInfo" style="width: 100%; height: 100%; display: none">
+</div>
+
+@Scripts.Render("~/Scripts/Warehouse.js")

@@ -1,12 +1,13 @@
-﻿using System.Web.Mvc;
+﻿using EvidencijaTransporta.Web.Models.ViewModels.Pages;
+using System.Web.Mvc;
 
 namespace EvidencijaTransporta.Web.Controllers
 {
-	public class HomeController : Controller
+	public class HomeController : BaseController
 	{
 		public ActionResult Index()
 		{
-			return View();
+			return View(new HomeViewModel());
 		}
 
 		public ActionResult About()

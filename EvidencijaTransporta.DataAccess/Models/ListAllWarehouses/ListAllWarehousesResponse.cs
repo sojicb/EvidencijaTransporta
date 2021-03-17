@@ -1,5 +1,4 @@
 ﻿using EvidencijaTransporta.DataAccess.Attributes;
-using System;
 using System.Data.SqlClient;
 
 namespace EvidencijaTransporta.DataAccess.Models.ListAllWarehouses
@@ -13,8 +12,11 @@ namespace EvidencijaTransporta.DataAccess.Models.ListAllWarehouses
 		[DataBeseResponseParameterName("Name")]
 		public string Name { get; set; }
 
-		[DataBeseResponseParameterName("Capacity")]
-		public int Capacity { get; set; }
+		[DataBeseResponseParameterName("CurrentCapacity")]
+		public int CurrentCapacity { get; set; }
+
+		[DataBeseResponseParameterName("MaximumCapacity")]
+		public int MaximumCapacity { get; set; }
 
 		[DataBeseResponseParameterName("City")]
 		public string City { get; set; }
@@ -32,7 +34,8 @@ namespace EvidencijaTransporta.DataAccess.Models.ListAllWarehouses
 			{
 				Id = (int)reader["Id"],
 				Name = reader["Name"] as string,
-				Capacity = (int)reader["Id"],
+				CurrentCapacity = (int)reader["CurrentCapacity"],
+				MaximumCapacity = (int)reader["MaximumCapacity"],
 				City = reader["City"] as string,
 				Country = reader["Country"] as string,
 				StreetAndNumber = reader["StreetAndNumber"] as string,

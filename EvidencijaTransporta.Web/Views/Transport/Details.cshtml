@@ -1,0 +1,28 @@
+﻿@model TransportModel
+
+<body>
+    <div><h1>Details</h1></div>
+    <div style="margin: 10px">
+        <table style="width: 100%; height: 100%; padding: 5px">
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Shipment amount</th>
+                <th>Type of Transport</th>
+                <th>Type of Vehicle</th>
+            </tr>
+            <tr>
+                <td> @Model.Id</td>
+                <td> @Model.Datum</td>
+                <td> @Model.KolicinaTransportneRobe</td>
+                <td> @Model.VrstaTransporta</td>
+                <td> @Model.VrstaVozila</td>
+                <td>
+                    <button id="hide">Hide Details</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+@Scripts.Render("~/Scripts/DetailsPage.js")

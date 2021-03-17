@@ -2,6 +2,7 @@
 using EvidencijaTransporta.DataAccess.Models.CreateReservation;
 using EvidencijaTransporta.DataAccess.Models.ListAllTransportTypes;
 using EvidencijaTransporta.DataAccess.Models.ListOfAllTransports;
+using EvidencijaTransporta.DataAccess.Models.UpdateTransportReservation;
 using EvidencijaTransporta.Web.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,24 @@ namespace EvidencijaTransporta.Web.Services
 
             return responseModels.Select(m => new TransportTypeModel(m)).ToList();
         }
+
+		/// <summary>
+		/// Updates the row in the table with the given model
+		/// </summary>
+		/// <param name="model">Model with parameters to be updated in database</param>
+		public void UpdateTransportReservationService(CreateTransportModel model)
+		{
+			UpdateTransportReservationRequest request = new UpdateTransportReservationRequest
+			{
+				Id = model.Id,
+				Date = model.Date,
+				ShipmentAmount = model.ShipmentAmount,
+				TypeOfTransport = model.SelectedTransportType,
+				TypeOfVehicle = model.VehicleType
+			};
+
+			_repository.CreateNewModel<UpdateTransportReservationRequest, UpdateTransportReservationResponse>(request);
+		}
 
 		/// <summary>
 		/// Converts the CreateTransportModel from the view into a request model to be inserted into database

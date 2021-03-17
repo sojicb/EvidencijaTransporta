@@ -1,0 +1,48 @@
+﻿@model WarehouseViewModel
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Warehouses.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Warehouses.First().Capacity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Warehouses.First().City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Warehouses.First().Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Warehouses.First().StreetAndNumber)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (WarehouseModel warehouse in Model.Warehouses)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => warehouse.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => warehouse.Capacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => warehouse.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => warehouse.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => warehouse.StreetAndNumber)
+            </td>
+            <td>
+                <button id="listStorage" type="button" >List Storage</button>
+                @Html.ActionLink("List storage", "Details", new { id = warehouse.Id }) |
+                @Html.ActionLink("Store", "Delete", new { id = warehouse.Id })
+            </td>
+        </tr>
+    }
+
+</table>

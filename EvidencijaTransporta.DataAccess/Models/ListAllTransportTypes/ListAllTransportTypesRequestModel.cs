@@ -2,7 +2,6 @@
 using EvidencijaTransporta.DataAccess.Attributes;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace EvidencijaTransporta.DataAccess.Models.ListAllTransportTypes
 {

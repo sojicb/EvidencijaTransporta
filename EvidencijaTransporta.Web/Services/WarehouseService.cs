@@ -1,4 +1,5 @@
 ﻿using EvidencijaTransporta.DataAccess;
+using EvidencijaTransporta.DataAccess.Models.GetStorageInformation;
 using EvidencijaTransporta.DataAccess.Models.ListAllWarehouses;
 using EvidencijaTransporta.Web.Models.WarehouseModels;
 using System.Collections.Generic;
@@ -25,7 +26,28 @@ namespace EvidencijaTransporta.Web.Services
 			List<ListAllWarehousesResponse> response = _repository.
 				GetListStoredProcedure<ListAllWarehousesResponse, ListAllWarehousesRequest>(new ListAllWarehousesRequest());
 
-			return response.Select(warehouse => new WarehouseModel(warehouse)).ToList();
+			//Learn this shit
+			return response?.Select(warehouse => new WarehouseModel(warehouse)).ToList() 
+				?? Enumerable.Empty<WarehouseModel>().ToList();
+		}
+
+		/// <summary>
+		/// Gets all storage information for a given warehouse
+		/// </summary>
+		/// <param name="id">warehouse id</param>
+		/// <returns>List of all information or epmty list if there is no rows in the database</returns>
+		public List<StorageModel> GetStorageInformationForWarehouseService(int id)
+		{
+			GetStorageInformationRequest request = new GetStorageInformationRequest
+			{
+				Id = id
+			};
+
+			List<GetStorageInformationResponse> response = _repository.
+				GetListStoredProcedureWithParameters<GetStorageInformationResponse, GetStorageInformationRequest>(request);
+
+			return response?.Select(information => new StorageModel(information)).ToList()
+				?? Enumerable.Empty<StorageModel>().ToList();
 		}
 	}
 }

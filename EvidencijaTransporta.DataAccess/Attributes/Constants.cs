@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EvidencijaTransporta.DataAccess.Attributes
+﻿namespace EvidencijaTransporta.DataAccess.Attributes
 {
 	public class Constants
 	{
@@ -13,6 +9,9 @@ namespace EvidencijaTransporta.DataAccess.Attributes
 			public const string CREATE_TIPPREVOZA = "CreateTipPrevoza";
 			public const string LIST_ALL_TRANSPORT_TYPES = "ListAllTransportTypes";
 			public const string LIST_ALL_WAREHOUSES = "ListAllWarehouses";
+			public const string UPDATE_TRANSPORT_RESERVATION = "UpdateTransportReservation";
+			public const string GET_STORAGE_INFORMATION = "GetStorageInformation";
+			public const string INSERT_STORAGE_INFORMATION = "InsertStorageInformation";
 		}
 	}
 }
