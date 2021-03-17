@@ -2,6 +2,7 @@
 using EvidencijaTransporta.DataAccess.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace EvidencijaTransporta.DataAccess.Models
 {
@@ -15,6 +16,22 @@ namespace EvidencijaTransporta.DataAccess.Models
 			return attribute.ProcedureName;
 		}
 
-		public abstract List<ParameterModel> GetParameters<TType>(TType istance);
+		public List<ParameterModel> GetParameters<TType>(TType istance)
+		{
+			List<ParameterModel> parameters = new List<ParameterModel>();
+
+			foreach (PropertyInfo property in istance.GetType().GetProperties())
+			{
+				DataBaseRequestParameterNameAttribute attribute = (DataBaseRequestParameterNameAttribute)property.GetCustomAttribute(typeof(DataBaseRequestParameterNameAttribute), false);
+
+				parameters.Add(new ParameterModel
+				{
+					ParameterName = attribute.AttributeName,
+					DbType = attribute.AttributeType,
+					Value = property.GetValue(istance)
+				});
+			}
+			return parameters;
+		}
 	}
 }

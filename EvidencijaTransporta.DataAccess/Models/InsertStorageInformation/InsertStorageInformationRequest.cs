@@ -1,9 +1,6 @@
-﻿using EvidencijaTransporta.Common.HelperModel;
-using EvidencijaTransporta.DataAccess.Attributes;
+﻿using EvidencijaTransporta.DataAccess.Attributes;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Reflection;
 
 namespace EvidencijaTransporta.DataAccess.Models.InsertStorageInformation
 {
@@ -24,23 +21,5 @@ namespace EvidencijaTransporta.DataAccess.Models.InsertStorageInformation
 
 		[DataBaseRequestParameterName("WarehouseId", SqlDbType.Int)]
 		public int WarehouseId { get; set; }
-
-		public override List<ParameterModel> GetParameters<TType>(TType istance)
-		{
-			List<ParameterModel> parameters = new List<ParameterModel>();
-
-			foreach (PropertyInfo property in istance.GetType().GetProperties())
-			{
-				DataBaseRequestParameterNameAttribute attribute = (DataBaseRequestParameterNameAttribute)property.GetCustomAttribute(typeof(DataBaseRequestParameterNameAttribute), false);
-
-				parameters.Add(new ParameterModel
-				{
-					ParameterName = attribute.AttributeName,
-					DbType = attribute.AttributeType,
-					Value = property.GetValue(istance)
-				});
-			}
-			return parameters;
-		}
 	}
 }
