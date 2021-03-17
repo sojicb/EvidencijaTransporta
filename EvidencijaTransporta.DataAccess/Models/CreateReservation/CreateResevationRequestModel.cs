@@ -1,9 +1,6 @@
-﻿using EvidencijaTransporta.Common.HelperModel;
-using EvidencijaTransporta.DataAccess.Attributes;
+﻿using EvidencijaTransporta.DataAccess.Attributes;
 using System;
 using System.Data;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace EvidencijaTransporta.DataAccess.Models.CreateReservation
 {
@@ -21,23 +18,5 @@ namespace EvidencijaTransporta.DataAccess.Models.CreateReservation
 
 		[DataBaseRequestParameterName("VrstaTransportaId", SqlDbType.Int)]
 		public int TypeOfTransport { get; set; }
-
-		public override List<ParameterModel> GetParameters<TType>(TType istance)
-		{
-			List<ParameterModel> parameters = new List<ParameterModel>();
-
-			foreach(PropertyInfo property in istance.GetType().GetProperties())
-			{
-				DataBaseRequestParameterNameAttribute attribute = (DataBaseRequestParameterNameAttribute)property.GetCustomAttribute(typeof(DataBaseRequestParameterNameAttribute), false);
-
-				parameters.Add(new ParameterModel
-				{
-					ParameterName = attribute.AttributeName,
-					DbType = attribute.AttributeType,
-					Value = property.GetValue(istance)
-				});
-			}
-			return parameters;
-		}
 	}
 }
