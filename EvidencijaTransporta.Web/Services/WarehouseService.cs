@@ -1,5 +1,6 @@
 ﻿using EvidencijaTransporta.DataAccess;
 using EvidencijaTransporta.DataAccess.Models.GetStorageInformation;
+using EvidencijaTransporta.DataAccess.Models.InsertStorageInformation;
 using EvidencijaTransporta.DataAccess.Models.ListAllWarehouses;
 using EvidencijaTransporta.Web.Models.WarehouseModels;
 using System.Collections.Generic;
@@ -7,15 +8,9 @@ using System.Linq;
 
 namespace EvidencijaTransporta.Web.Services
 {
-	public class WarehouseService
+	public class WarehouseService : BaseService
 	{
-		//TODO ADD base service
-		private readonly Repository _repository;
-
-		public WarehouseService(Repository repository)
-		{
-			_repository = repository;
-		}
+		public WarehouseService(Repository repository) : base(repository) { }
 
 		/// <summary>
 		/// Gets a list of all warehouses from the database
@@ -26,9 +21,32 @@ namespace EvidencijaTransporta.Web.Services
 			List<ListAllWarehousesResponse> response = _repository.
 				GetListStoredProcedure<ListAllWarehousesResponse, ListAllWarehousesRequest>(new ListAllWarehousesRequest());
 
-			//Learn this shit
 			return response?.Select(warehouse => new WarehouseModel(warehouse)).ToList() 
 				?? Enumerable.Empty<WarehouseModel>().ToList();
+		}
+
+		public StorageModel PrepareModel(int id)
+		{
+			return new StorageModel
+			{
+				WarehouseId = id
+			};
+		}
+
+		public void InsertStorageInformationService(StorageModel model)
+		{
+			InsertStorageInformationRequest request = new InsertStorageInformationRequest
+			{
+				Amount = model.Amount,
+				DateCleared = model.DateCleared,
+				DateStored = model.DateStored,
+				Type = model.Type,
+				WarehouseId = model.WarehouseId
+			};
+
+				_repository.
+			ExecuteProcedureWithParameters<InsertStorageInformationRequest, InsertStorageInformationResponse>(request);
+
 		}
 
 		/// <summary>

@@ -71,7 +71,7 @@ namespace EvidencijaTransporta.DataAccess
 			}
 		}
 
-		public TResponse CreateNewModel<TRequest, TResponse>(TRequest request)
+		public TResponse ExecuteProcedureWithParameters<TRequest, TResponse>(TRequest request)
 			where TResponse : IResponseModel, new()
 			where TRequest : RequestModel<TRequest>, new()
 		{

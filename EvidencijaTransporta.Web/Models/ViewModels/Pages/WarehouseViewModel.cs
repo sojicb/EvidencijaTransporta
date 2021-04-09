@@ -13,5 +13,6 @@ namespace EvidencijaTransporta.Web.Models.ViewModels.Pages
 		}
 
 		public IList<WarehouseModel> Warehouses { get; set; }
+		public IList<StorageModel> Storage { get; set; }
 	}
 }

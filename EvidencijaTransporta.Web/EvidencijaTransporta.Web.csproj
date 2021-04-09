@@ -137,12 +137,15 @@
     <Compile Include="Models\CreateTransportModel.cs" />
     <Compile Include="Models\TransportModel.cs" />
     <Compile Include="Models\TransportTypeModel.cs" />
+    <Compile Include="Models\VehicleTypeModel.cs" />
     <Compile Include="Models\ViewModels\BaseViewModel.cs" />
+    <Compile Include="Models\CreateTransportJsonModel.cs" />
     <Compile Include="Models\ViewModels\Pages\AboutViewModel.cs" />
     <Compile Include="Models\ViewModels\Pages\ContactViewModel.cs" />
     <Compile Include="Models\ViewModels\Pages\HomeViewModel.cs" />
     <Compile Include="Models\ViewModels\Pages\TransportViewModel.cs" />
     <Compile Include="Models\ViewModels\Pages\WarehouseViewModel.cs" />
+    <Compile Include="Models\WarehouseModels\JsonStorageModel.cs" />
     <Compile Include="Models\WarehouseModels\StorageModel.cs" />
     <Compile Include="Models\WarehouseModels\WarehouseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -173,7 +176,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\PartialViewRendering.js" />
+    <Content Include="Scripts\Transport.js" />
     <Content Include="Scripts\Warehouse.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -193,8 +196,10 @@
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Transport\Details.cshtml" />
-    <Content Include="Views\Warehouse\ListOfWarehouses.cshtml" />
-    <Content Include="Views\Warehouse\OpenStoreItems.cshtml" />
+    <Content Include="Views\Warehouse\OpenStoredItems.cshtml" />
+    <Content Include="Views\Warehouse\RenderStorage.cshtml" />
+    <Content Include="Views\Transport\TransportTable.cshtml" />
+    <Content Include="Views\Warehouse\WarehouseTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

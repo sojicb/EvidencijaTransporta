@@ -22,22 +22,29 @@ namespace EvidencijaTransporta.Web.Controllers
             return PartialView(CreateReservateTransportViewModel());
         }
 
+        public ActionResult ListTransportReservations()
+        {
+            return PartialView("TransportTable", new TransportViewModel(TransportService.ListTransportsService()));
+        }
+
+
         /// <summary>
         /// Method that creates a new model of ReservateTransport
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        /// //TODO FIX ON EMPTY MODEL
 		[HttpPost]
-		public ActionResult CreateReservateTransport(CreateTransportModel model)
+		public ActionResult CreateReservateTransport(CreateTransportJsonModel model)
 		{
             if (ModelState.IsValid)
 			{
                 TransportService.ReservateTransportService(model);
 
-                return RedirectToAction("Index");
-			}
+                return RedirectToAction("ListTransportReservations");
+            }
 
-			return View(CreateReservateTransportViewModel());
+			return PartialView(CreateReservateTransportViewModel());
 		}
 
 		public ActionResult FillEditTransport(int id)
@@ -47,10 +54,10 @@ namespace EvidencijaTransporta.Web.Controllers
             CreateTransportModel model =  new CreateTransportModel
             {
                 Id = transportModel.Id,
-                ShipmentAmount = transportModel.KolicinaTransportneRobe,
-                Date = transportModel.Datum,
-                SelectedTransportType = transportModel.VrstaTransportaId,
-                VehicleType = transportModel.VrstaVozila
+                ShipmentAmount = transportModel.ShipmentAmount,
+                Date = transportModel.Date,
+                SelectedTransportType = transportModel.TransportTypeId,
+                VehicleType = transportModel.VehicleType
             };
 
             return PartialView("ReservateTransport", CreateReservateTransportViewModel(model));
@@ -62,7 +69,7 @@ namespace EvidencijaTransporta.Web.Controllers
             {
                 TransportService.UpdateTransportReservationService(model);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ListTransportReservations");
             }
 
             return View(CreateReservateTransportViewModel(model));
@@ -75,6 +82,13 @@ namespace EvidencijaTransporta.Web.Controllers
             TransportModel model = TransportService.ListTransportsService().Where(x => x.Id == id).FirstOrDefault();
 
             return PartialView(model);
+        }
+
+        public ActionResult Delete(int id)
+		{
+            TransportService.RemoveTransportReservationService(id);
+
+            return RedirectToAction("ListTransportreservations");
         }
 
         private CreateTransportModel CreateReservateTransportViewModel(CreateTransportModel model = null)
@@ -94,6 +108,12 @@ namespace EvidencijaTransporta.Web.Controllers
             {
                 Text = transport.TransportType,
                 Value = transport.Id.ToString()
+            });
+
+            createTransportModel.VehicleTypes = TransportService.GetVehiclesService(3).Select(vehicle => new SelectListItem
+            {
+                Text = vehicle.VehicleType,
+                Value = vehicle.Id.ToString()
             });
 
             return createTransportModel;

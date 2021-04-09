@@ -2,52 +2,20 @@
 
 <h2>List of all Transports</h2>
 
-
 <div id="dvEdit">
     @{
         Html.RenderAction("ReservateTransport");
     }
 </div>
+
 <div id="dvDetails" style="width: 100%; height: 100%; display: none">
+    @* Div populated with details of the chosen transport reservation *@
 </div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Transports.First().Datum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Transports.First().KolicinaTransportneRobe)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Transports.First().VrstaTransporta)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Transports.First().VrstaVozila)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (TransportModel transport in Model.Transports)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => transport.Datum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => transport.KolicinaTransportneRobe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => transport.VrstaTransporta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => transport.VrstaVozila)
-            </td>
-            <td>
-                <button id="edit-@transport.Id" type="button" class="btn btn-default" onclick="FillEditFileds(@transport.Id)">Edit</button> |
-                <button id="details" type="button" onclick="DetailsBtnClick(@transport.Id, 'Transport', 'Details', 'dvDetails')" class="btn btn-default">Details</button>
-            </td>
-        </tr>
+<div id="dvTable" style="width: 100%; height: 100%;">
+    @{
+        Html.RenderAction("ListTransportReservations");
     }
-</table>
+</div>
 
-@Scripts.Render("~/Scripts/PartialViewRendering.js")
+@Scripts.Render("~/Scripts/Transport.js")

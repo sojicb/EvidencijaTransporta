@@ -8,11 +8,15 @@ namespace EvidencijaTransporta.DataAccess.Models.InsertStorageInformation
 	{
 		public int Id { get; set; }
 
+		[DataBeseResponseParameterName("RetVal")]
+		public string ErrorMessage { get; set; }
+
 		public IResponseModel MapToObject(SqlDataReader reader)
 		{
 			return new InsertStorageInformationResponse
 			{
-				Id = (int)reader["Id"]
+				//Id = (int)reader["Id"],
+				ErrorMessage = reader["RetVal"] as string
 			};
 		}
 	}
