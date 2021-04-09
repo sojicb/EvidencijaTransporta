@@ -1,9 +1,6 @@
 ﻿using EvidencijaTransporta.DataAccess.Models.ListOfAllTransports;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace EvidencijaTransporta.Web.Models
 {
@@ -12,24 +9,27 @@ namespace EvidencijaTransporta.Web.Models
 		public TransportModel(ResponseAllTransports response)
 		{
 			Id = response.Id;
-			Datum = response.Date;
-			VrstaVozila = response.TypeOfVehicle;
-			KolicinaTransportneRobe = response.ShipmentAmount;
-			VrstaTransporta = response.TypeOfTransport;
+			Date = response.Date;
+			VehicleType = response.TypeOfVehicle;
+			TransportTypeId = response.TransportTypeId;
+			ShipmentAmount = response.ShipmentAmount;
+			TransportType = response.TypeOfTransport;
 		}
 
 		public int Id { get; set; }
 
-		[Display(Name = "Datum")]
-		public DateTime Datum { get; set; }
+		[Display(Name = "Date")]
+		public DateTime Date { get; set; }
 
-		[Display(Name = "Vrsta Transporta")]
-		public string VrstaTransporta { get; set; }
+		[Display(Name = "Transport Type")]
+		public string TransportType { get; set; }
 
-		[Display(Name = "Kolicina Transportne Robe")]
-		public string KolicinaTransportneRobe { get; set; }
+		[Display(Name = "Shipment Amount")]
+		public string ShipmentAmount { get; set; }
 
-		[Display(Name = "Vrsta Vozila")]
-		public string VrstaVozila { get; set; }
+		[Display(Name = "Vehicle Type")]
+		public string VehicleType { get; set; }
+
+		public int TransportTypeId { get; set; }
 	}
 }

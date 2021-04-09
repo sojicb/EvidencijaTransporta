@@ -13,7 +13,7 @@ namespace EvidencijaTransporta.DataAccess
 
 		public List<TResponse> GetListStoredProcedure<TResponse, TRequest>(TRequest request)
 			where TResponse : IResponseModel, new()
-			where TRequest : IRequestModel, new()
+			where TRequest : RequestModel<TRequest>, new()
 		{
 			using (SqlConnection connection = new SqlConnection(_connectionString))
 			{
@@ -38,9 +38,42 @@ namespace EvidencijaTransporta.DataAccess
 			}
 		}
 
-		public TResponse CreateNewModel<TRequest, TResponse>(TRequest request)
+		public List<TResponse> GetListStoredProcedureWithParameters<TResponse, TRequest>(TRequest request)
 			where TResponse : IResponseModel, new()
-			where TRequest : IRequestModel, new()
+			where TRequest : RequestModel<TRequest>, new()
+		{
+			using (SqlConnection connection = new SqlConnection(_connectionString))
+			{
+				connection.Open();
+
+				using (SqlCommand command = connection.CreateCommand())
+				{
+					command.CommandText = request.GetClassAttribute();
+					command.CommandType = CommandType.StoredProcedure;
+
+					foreach (ParameterModel parameter in request.GetParameters(request))
+					{
+						command.Parameters.Add(parameter.ParameterName, parameter.DbType);
+						command.Parameters[parameter.ParameterName].Value = parameter.Value;
+					}
+
+					List<TResponse> response = new List<TResponse>();
+
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							response.Add((TResponse)new TResponse().MapToObject(reader));
+						}
+					}
+					return response;
+				}
+			}
+		}
+
+		public TResponse ExecuteProcedureWithParameters<TRequest, TResponse>(TRequest request)
+			where TResponse : IResponseModel, new()
+			where TRequest : RequestModel<TRequest>, new()
 		{
 			using (SqlConnection connection = new SqlConnection(_connectionString))
 			{

@@ -16,6 +16,9 @@ namespace EvidencijaTransporta.DataAccess.Models.ListOfAllTransports
 		[DataBeseResponseParameterName("KolicinaTransportneRobe")]
 		public string ShipmentAmount { get; set; }
 
+		[DataBeseResponseParameterName("TransportTypeId")]
+		public int TransportTypeId { get; set; }
+
 		[DataBeseResponseParameterName("VrstaVozila")]
 		public string TypeOfVehicle { get; set; }
 
@@ -29,6 +32,7 @@ namespace EvidencijaTransporta.DataAccess.Models.ListOfAllTransports
 				Id = (int)reader["Id"],
 				ShipmentAmount = reader["KolicinaTransportneRobe"] as string,
 				Date = (DateTime)reader["Datum"],
+				TransportTypeId = (int)reader["TipPrevozaId"],
 				TypeOfTransport = reader["VrstaPrevoza"] as string,
 				TypeOfVehicle = reader["VrstaVozila"] as string
 			};

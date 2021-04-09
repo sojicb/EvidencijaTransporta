@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using EvidencijaTransporta.Web.Models.ViewModels.Pages;
 using System.Web.Mvc;
 
 namespace EvidencijaTransporta.Web.Controllers
 {
-	public class HomeController : Controller
+	public class HomeController : BaseController
 	{
 		public ActionResult Index()
 		{
-			return View();
+			return View(new HomeViewModel());
 		}
 
 		public ActionResult About()
@@ -19,6 +16,8 @@ namespace EvidencijaTransporta.Web.Controllers
 
 			return View();
 		}
+
+		//TODO make one controller for one page
 
 		public ActionResult Contact()
 		{

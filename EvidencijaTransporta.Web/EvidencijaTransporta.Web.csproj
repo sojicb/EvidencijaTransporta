@@ -123,17 +123,35 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TransportController.cs" />
+    <Compile Include="Controllers\WarehouseController.cs" />
+    <Compile Include="Extesnions\HtmlHelperExtension.cs" />
+    <Compile Include="Extesnions\StringExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CreateTransportModel.cs" />
     <Compile Include="Models\TransportModel.cs" />
     <Compile Include="Models\TransportTypeModel.cs" />
+    <Compile Include="Models\VehicleTypeModel.cs" />
+    <Compile Include="Models\ViewModels\BaseViewModel.cs" />
+    <Compile Include="Models\CreateTransportJsonModel.cs" />
+    <Compile Include="Models\ViewModels\Pages\AboutViewModel.cs" />
+    <Compile Include="Models\ViewModels\Pages\ContactViewModel.cs" />
+    <Compile Include="Models\ViewModels\Pages\HomeViewModel.cs" />
+    <Compile Include="Models\ViewModels\Pages\TransportViewModel.cs" />
+    <Compile Include="Models\ViewModels\Pages\WarehouseViewModel.cs" />
+    <Compile Include="Models\WarehouseModels\JsonStorageModel.cs" />
+    <Compile Include="Models\WarehouseModels\StorageModel.cs" />
+    <Compile Include="Models\WarehouseModels\WarehouseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\TransportService.cs" />
+    <Compile Include="Services\WarehouseService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -144,6 +162,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\DetailsPage.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -157,6 +176,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Transport.js" />
+    <Content Include="Scripts\Warehouse.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -168,15 +189,20 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Transport\ListTransportReservations.cshtml" />
     <Content Include="Views\Transport\ReservateTransport.cshtml" />
+    <Content Include="Views\Warehouse\Index.cshtml" />
+    <Content Include="Views\Transport\Index.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Transport\Details.cshtml" />
+    <Content Include="Views\Warehouse\OpenStoredItems.cshtml" />
+    <Content Include="Views\Warehouse\RenderStorage.cshtml" />
+    <Content Include="Views\Transport\TransportTable.cshtml" />
+    <Content Include="Views\Warehouse\WarehouseTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
